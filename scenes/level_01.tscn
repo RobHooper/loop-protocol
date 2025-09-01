@@ -1,0 +1,206 @@
+[gd_scene load_steps=11 format=3 uid="uid://cb17awhqvcaee"]
+
+[ext_resource type="PackedScene" uid="uid://dlwhxwmqakv88" path="res://actors/player/Player.tscn" id="1_bpt1m"]
+[ext_resource type="Script" uid="uid://ccy3x0qf1ndqk" path="res://scripts/parallax_background.gd" id="1_mofoo"]
+[ext_resource type="Script" uid="uid://c6spya7kvvo4a" path="res://scenes/level_01.gd" id="1_qgxqk"]
+[ext_resource type="PackedScene" uid="uid://cbkoeh2hi83v8" path="res://actors/bullet/Bullet.tscn" id="4_j60wy"]
+[ext_resource type="PackedScene" uid="uid://bkq546j8oov71" path="res://actors/asteroid/Asteroid.tscn" id="4_nr3cb"]
+[ext_resource type="Texture2D" uid="uid://0wgicgunepea" path="res://assets/licenced/images/placeholder/Blue Nebula/Blue_Nebula_05-512x512.png" id="5_e6mo4"]
+[ext_resource type="Texture2D" uid="uid://gvyxspnp0bah" path="res://assets/licenced/images/placeholder/Purple Nebula/Purple_Nebula_06-512x512.png" id="5_lwi15"]
+[ext_resource type="Script" uid="uid://docwdvie2vsdh" path="res://scenes/pop_up_menu.gd" id="8_1b6n0"]
+[ext_resource type="PackedScene" uid="uid://bjfade5r7s7kk" path="res://actors/bullet/Rocket.tscn" id="9_lwi15"]
+[ext_resource type="PackedScene" uid="uid://dxwc1c8nfnti5" path="res://actors/powerups/PowerUp.tscn" id="10_lwi15"]
+
+[node name="Level01" type="Node2D"]
+script = ExtResource("1_qgxqk")
+asteroid_scene = ExtResource("4_nr3cb")
+powerup_scene = ExtResource("10_lwi15")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("1_mofoo")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(512, 512)
+
+[node name="BackgroundNext" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("5_lwi15")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="Background" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("5_e6mo4")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("1_bpt1m")]
+position = Vector2(564, 345)
+collision_mask = 10
+Bullet = ExtResource("4_j60wy")
+Rocket = ExtResource("9_lwi15")
+
+[node name="Asteroid" parent="." instance=ExtResource("4_nr3cb")]
+position = Vector2(393, 210)
+points = 200
+
+[node name="PowerUp" parent="." instance=ExtResource("10_lwi15")]
+position = Vector2(980, 178)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Score" type="RichTextLabel" parent="UI"]
+offset_left = 22.0
+offset_top = 14.0
+offset_right = 139.0
+offset_bottom = 42.0
+text = "Score: 0"
+autowrap_mode = 0
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="UI"]
+offset_left = 914.0
+offset_top = 16.0
+offset_right = 1132.0
+offset_bottom = 43.0
+step = 1.0
+value = 100.0
+rounded = true
+
+[node name="Reload" type="BoxContainer" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -117.0
+offset_right = 275.0
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="UI/Reload"]
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(0.105882, 0.105882, 0.105882, 0.411765)
+
+[node name="ReloadPercentage" type="ProgressBar" parent="UI/Reload/ColorRect"]
+layout_mode = 2
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 261.0
+offset_bottom = 107.0
+show_percentage = false
+
+[node name="ActionName" type="RichTextLabel" parent="UI/Reload/ColorRect"]
+layout_mode = 2
+offset_left = 11.0
+offset_top = 15.0
+offset_right = 264.0
+offset_bottom = 50.0
+text = "L.O.O.P. MODE: bullet"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ActionNext" type="RichTextLabel" parent="UI/Reload/ColorRect"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 45.0
+offset_right = 263.0
+offset_bottom = 80.0
+text = "NEXT: bullet"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="PopUpMenu" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("8_1b6n0")
+
+[node name="ColorRect" type="ColorRect" parent="PopUpMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -338.5
+offset_top = -173.5
+offset_right = 338.5
+offset_bottom = 173.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.194349, 0.194349, 0.194349, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PopUpMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.5
+offset_top = -119.0
+offset_right = 278.5
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "Welcome, Cadet.
+
+You are the first pilot cleared for live testing of the L.O.O.P. Protocol — a next-gen weapons system designed to adapt on the fly.
+
+L.O.O.P. dynamically cycles your ship’s ammunition type based on combat conditions. You don’t choose your loadout. You adapt to it.
+
+HQ wants data. You want to survive.
+
+[b]Press SPACE to begin.[/b]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -75.5
+offset_right = 152.0
+offset_bottom = 75.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.194349, 0.194349, 0.194349, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOver"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.5
+offset_top = -52.0
+offset_right = 137.5
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over...
+Registering High Score..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="new_ability" from="Player" to="." method="_on_player_new_ability"]
+[connection signal="reloading" from="Player" to="." method="_on_player_reloading"]
+[connection signal="asteroid_destroyed" from="Asteroid" to="." method="_on_asteroid_destroyed"]
+[connection signal="collected" from="PowerUp" to="." method="_on_power_up_collected"]
+[connection signal="collected" from="PowerUp" to="Player" method="_on_power_up_collected"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

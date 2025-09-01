@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbkoeh2hi83v8"]
+
+[ext_resource type="Script" uid="uid://dnmnieurcxfsk" path="res://actors/bullet/bullet.gd" id="1_8mjoc"]
+[ext_resource type="Texture2D" uid="uid://tq0wpe1xu5ni" path="res://assets/licenced/images/actors/bullet/Proton_Small_png_processed.png" id="11_288cd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tihky"]
+radius = 3.16228
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wdufo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_288cd")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Bullet" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_8mjoc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tihky")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.1, 1.1)
+sprite_frames = SubResource("SpriteFrames_wdufo")
+animation = &"idle"
+autoplay = "idle"

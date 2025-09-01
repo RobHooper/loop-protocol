@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpgykao8ykuc0"]
+
+[ext_resource type="Script" uid="uid://clg5oi1gv3p7a" path="res://ui/game_over_menu.gd" id="1_el6q2"]
+
+[node name="GameOverMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_el6q2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -183.0
+offset_top = -85.0
+offset_right = 217.0
+offset_bottom = 115.0
+color = Color(0.237539, 0.237539, 0.237539, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -158.0
+offset_top = -62.0
+offset_right = 192.0
+offset_bottom = 88.0
+text = "Game Over.
+
+Your Score:
+
+Press SPACE to play again!"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

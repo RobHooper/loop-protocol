@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://dxwc1c8nfnti5"]
+
+[ext_resource type="Script" uid="uid://dsco5rt4i3dkj" path="res://actors/powerups/power_up.gd" id="1_3n71e"]
+[ext_resource type="Texture2D" uid="uid://c48ct2x61c662" path="res://assets/licenced/images/actors/powerups/bullet.png" id="2_3n71e"]
+[ext_resource type="Texture2D" uid="uid://cjb1c633ktqsd" path="res://assets/licenced/images/actors/powerups/health.png" id="3_ghq8t"]
+[ext_resource type="Texture2D" uid="uid://s7ytb0ioa2la" path="res://assets/licenced/images/actors/powerups/neg-bullet.png" id="4_ghq8t"]
+[ext_resource type="Texture2D" uid="uid://dw3cqal17jn1q" path="res://assets/licenced/images/actors/powerups/shield.png" id="5_4yoh3"]
+[ext_resource type="Texture2D" uid="uid://bqv8jh77qu472" path="res://assets/licenced/images/actors/powerups/rocket.png" id="5_ghq8t"]
+[ext_resource type="Texture2D" uid="uid://clcopy14kdbpn" path="res://assets/licenced/images/actors/powerups/triple.png" id="6_adw7h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbhrc"]
+size = Vector2(47, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gyxjj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3n71e")
+}],
+"loop": true,
+"name": &"bullet",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ghq8t")
+}],
+"loop": true,
+"name": &"health",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ghq8t")
+}],
+"loop": true,
+"name": &"rapidfire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ghq8t")
+}],
+"loop": true,
+"name": &"rocket",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_4yoh3")
+}],
+"loop": true,
+"name": &"shield",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_adw7h")
+}],
+"loop": true,
+"name": &"triple",
+"speed": 5.0
+}]
+
+[node name="PowerUp" type="Area2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_3n71e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_cbhrc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gyxjj")
+animation = &"rapidfire"
+autoplay = "triple"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,125 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsdlis176d7ya"]
+
+[ext_resource type="Script" uid="uid://dpc7l7148qeqx" path="res://scenes/game_over.gd" id="1_tbwuq"]
+[ext_resource type="Texture2D" uid="uid://bvgd0xeo0jve4" path="res://assets/licenced/images/placeholder/Starfields/Starfield_06-512x512.png" id="2_wqhvx"]
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_tbwuq")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(512, 512)
+
+[node name="BackgroundCurrent" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_wqhvx")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="HighScore" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="HighScore"]
+offset_left = 228.0
+offset_top = 94.0
+offset_right = 935.0
+offset_bottom = 522.0
+size_flags_vertical = 3
+color = Color(0.114897, 0.114897, 0.114897, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HighScore"]
+offset_left = 255.0
+offset_top = 123.0
+offset_right = 917.0
+offset_bottom = 178.0
+bbcode_enabled = true
+text = "[b]High Scores[/b]"
+fit_content = true
+scroll_active = false
+
+[node name="List" type="VBoxContainer" parent="HighScore"]
+offset_left = 258.0
+offset_top = 160.0
+offset_right = 583.0
+offset_bottom = 424.0
+
+[node name="LastScore" type="RichTextLabel" parent="HighScore"]
+offset_left = 262.0
+offset_top = 437.0
+offset_right = 887.0
+offset_bottom = 487.0
+text = "Last Score: "
+
+[node name="Blurb" type="RichTextLabel" parent="HighScore"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 28.0
+offset_top = -164.0
+offset_right = 340.0
+offset_bottom = 131.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[b]L.O.O.P. Protocol Complete[/b]
+
+Your ship has been disabled. The system has shut down all weapon cycles — but further data is out there.
+
+[i]Press SPACE to reboot and try again.[/i]
+"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="EnterName" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="EnterName"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -211.5
+offset_top = -77.0
+offset_right = 211.5
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18359, 0.18359, 0.18359, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="EnterName"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.5
+offset_top = -46.5
+offset_right = 193.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cadet Name:"
+vertical_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="EnterName"]
+anchors_preset = -1
+anchor_left = 0.977
+anchor_top = 0.5
+anchor_right = 0.977
+anchor_bottom = 0.5
+offset_left = -587.504
+offset_top = -34.0
+offset_right = -372.504
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 2
+placeholder_text = "PLR"
+alignment = 3
+max_length = 3
+
+[connection signal="text_submitted" from="EnterName/NameInput" to="." method="_on_submit_pressed"]
