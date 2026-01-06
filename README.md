@@ -3,6 +3,7 @@ A GMTK 2025 GameJam game by Bob H.
 
 [Play the game on itch.io!](https://zyiu.itch.io/loop-protocol)
 
+[Read the retrospective](https://zyiu.itch.io/loop-protocol/devlog/1002863/gmtk-2025-retrospective)
 
 # The Idea:
 * Asteroids but each attack rotates through a list of random abilities.
@@ -19,8 +20,8 @@ A GMTK 2025 GameJam game by Bob H.
 * Loop around border
 
 # Assets downloaded:
-https://screamingbrainstudios.itch.io/seamless-space-backgrounds
-https://ravenmore.itch.io/pixel-space-shooter-assets
+* https://screamingbrainstudios.itch.io/seamless-space-backgrounds
+* https://ravenmore.itch.io/pixel-space-shooter-assets
 
 
 # Layers + Mask
